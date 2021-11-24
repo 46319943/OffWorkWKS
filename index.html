@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WKS Work Life</title>
+    <style></style>
+  </head>
+  <body>
+    <canvas width="608" height="608"></canvas>
+    <input type="text" name="time" id="time" placeholder="输入你的下班时间" />
+    <input type="radio" id="r427" name="room" value="r427" checked />
+    <label for="r427">427</label>
+    <input type="radio" id="r428" name="room" value="r428" />
+    <label for="r428">428</label>
+    <button onclick="draw()">生成</button>
+    <script>
+      var ctx = document.querySelector("canvas").getContext("2d");
+
+      const myFont = new FontFace("MyFont", "url(./font4.ttf)");
+      let fontPromise = myFont.load();
+
+      const img427 = new Image();
+      const img428 = new Image();
+      let imgResolve = null;
+      let imgPromise = new Promise((resolve) => {
+        imgResolve = resolve;
+      });
+      img427.addEventListener("load", () => {
+        imgResolve();
+      });
+      img427.src = "427.png";
+      img428.src = "428.png";
+
+      Promise.all([fontPromise, imgPromise]).then(() => {
+        document.fonts.add(myFont);
+        // execute drawImage statements here
+        ctx.drawImage(img427, 0, 0);
+
+        ctx.font = "80px MyFont";
+        ctx.textBaseline = "top";
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText("12:00", 18, 391);
+
+        ctx.strokeStyle = "#98682d";
+        ctx.lineWidth = 4;
+        ctx.strokeText("12:00", 18, 391);
+      });
+
+      function draw() {
+        console.log("draw");
+
+        if (document.querySelector("input#r427").checked == true) {
+          ctx.drawImage(img427, 0, 0);
+        } else {
+          ctx.drawImage(img428, 0, 0);
+        }
+
+        let timeString = document.querySelector("input#time").value;
+
+        ctx.font = "80px MyFont";
+        ctx.textBaseline = "top";
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText(timeString, 18, 391);
+
+        ctx.strokeStyle = "#98682d";
+        ctx.lineWidth = 4;
+        ctx.strokeText(timeString, 18, 391);
+      }
+    </script>
+  </body>
+</html>
