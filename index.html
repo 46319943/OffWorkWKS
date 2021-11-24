@@ -15,7 +15,11 @@
     <input type="radio" id="r428" name="room" value="r428" />
     <label for="r428">428</label>
     <button onclick="draw()">生成</button>
+    <a download="OffWorkWKS.jpg" href="" onclick="downloadCanvas(this);"
+      >下载图片</a
+    >
     <script>
+      const canvas = document.querySelector("canvas");
       var ctx = document.querySelector("canvas").getContext("2d");
 
       const myFont = new FontFace("MyFont", "url(./font4.ttf)");
@@ -69,6 +73,11 @@
         ctx.strokeStyle = "#98682d";
         ctx.lineWidth = 4;
         ctx.strokeText(timeString, 18, 391);
+      }
+
+      async function downloadCanvas(el) {
+        const imageURI = canvas.toDataURL("image/jpg");
+        el.href = imageURI;
       }
     </script>
   </body>
