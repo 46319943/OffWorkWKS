@@ -15,7 +15,7 @@
     <input type="radio" id="r428" name="room" value="r428" />
     <label for="r428">428</label>
     <button onclick="draw()">生成</button>
-    <a download="OffWorkWKS.jpg" href="" onclick="downloadCanvas(this);"
+    <a download="OffWorkWKS.png" href="" onclick="downloadCanvas(this);"
       >下载图片</a
     >
     <script>
@@ -76,7 +76,7 @@
       }
 
       async function downloadCanvas(el) {
-        const imageURI = canvas.toDataURL("image/jpg");
+        const imageURI = canvas.toDataURL("image/png");
         el.href = imageURI;
       }
     </script>
